@@ -1,4 +1,5 @@
 function displayData(clientsList = clients) {
+  clearList();
   const ul = document.querySelector("#clientsData");
   clientsList.forEach(client => {
     ul.appendChild(getLiElement(client));
@@ -117,4 +118,31 @@ function resultOfFilter(filteredClients) {
     document.querySelector(".resultList").style.display = "block";
     document.querySelector(".notFound").style.display = "none";
   }
+}
+
+function addClient() {
+  const data = {
+    id: 1,
+    firstName: "Demetris",
+    lastName: "Nerheny",
+    email: "dnerheny0@timesonline.co.uk",
+    gender: "Male",
+    amount: "$2.08",
+    date: "7/28/2019",
+    avatar: "https://robohash.org/omnisveniamqui.jpg?size=50x50&set=set1"
+  };
+
+  const newId = database
+    .ref()
+    .child("clients")
+    .push().key;
+  let updates = {};
+  updates[`clients/${newId}`] = data;
+  database.ref().update(updates, function(error) {
+    if (error) {
+      console.error("New client was not added! Error occured!");
+    } else {
+      console.log("Data added to database!");
+    }
+  });
 }
