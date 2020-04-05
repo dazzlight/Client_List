@@ -53,123 +53,178 @@
         </button>
       </nav>
     </section>
-    <section class="container">
-      <form method="POST" id="newClientForm">
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            class="form-control"
-            id="firstName"
-            placeholder="First Name"
-          />
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            class="form-control"
-            id="lastName"
-            placeholder="Last Name"
-          />
-        </div>
-        <div class="form-group">
-          <label for="clientEmail">Email address</label>
-          <input
-            type="email"
-            name="email"
-            class="form-control"
-            id="clientEmail"
-            aria-describedby="emailHelp"
-          />
-          <small id="emailHelp" class="form-text text-muted"
-            >We'll never share your email with anyone else.</small
-          >
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="gender"
-            id="genderMale"
-            value="Male"
-          />
-          <label class="form-check-label" for="genderMale">
-            Male
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="gender"
-            id="genderFemale"
-            value="Female"
-          />
-          <label class="form-check-label" for="genderFemale">
-            Female
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="gender"
-            id="genderOther"
-            value="Other"
-          />
-          <label class="form-check-label" for="genderOther">
-            Other
-          </label>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <div class="form-group">
-              <label for="amount">Amount</label>
-              <input
-                type="text"
-                name="amount"
-                class="form-control"
-                id="amount"
-                placeholder="Amount"
-              />
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="form-group">
-              <label for="date">Date</label>
-              <input
-                type="text"
-                name="date"
-                class="form-control"
-                id="date"
-                placeholder="Date"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="btn btn-link">
-            <i class="fas fa-plus"></i> Browse Photo<input
-              type="file"
-              hidden
-              name="photo"
-            />
-          </label>
-        </div>
-        <!-- <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1"
-            >Check me out</label
-          >
-        </div> -->
+    <section class="container" id="modal">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-primary btn-block m-2"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        Add new client!
+      </button>
 
-        <button type="submit" class="btn btn-primary">
-          Add new client
-        </button>
-      </form>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Adding new client
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" id="newClientForm">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="First Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Last Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="clientEmail">Email address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    id="clientEmail"
+                    aria-describedby="emailHelp"
+                  />
+                  <small id="emailHelp" class="form-text text-muted"
+                    >We'll never share your email with anyone else.</small
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="genderMale"
+                    value="Male"
+                  />
+                  <label class="form-check-label" for="genderMale">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="genderFemale"
+                    value="Female"
+                  />
+                  <label class="form-check-label" for="genderFemale">
+                    Female
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="genderOther"
+                    value="Other"
+                  />
+                  <label class="form-check-label" for="genderOther">
+                    Other
+                  </label>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="amount">Amount</label>
+                      <input
+                        type="text"
+                        name="amount"
+                        class="form-control"
+                        id="amount"
+                        placeholder="Amount"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="date">Date</label>
+                      <input
+                        type="text"
+                        name="date"
+                        class="form-control"
+                        id="date"
+                        placeholder="Date"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="btn btn-link">
+                    <i class="fas fa-plus"></i> Browse Photo<input
+                      type="file"
+                      hidden
+                      name="photo"
+                    />
+                  </label>
+                </div>
+                <!-- <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+            <label class="form-check-label" for="exampleCheck1"
+              >Check me out</label
+            >
+          </div> -->
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    onclick="hideModal()"
+                    id="saveChanges"
+                  >
+                    Save changes
+                  </button>
+                </div>
+                <!-- <button type="submit" class="btn btn-primary">
+                  Add new client
+                </button> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <section class="container resultList">
       <div class="row">

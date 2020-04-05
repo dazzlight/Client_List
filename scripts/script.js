@@ -187,3 +187,8 @@ function logOut() {
       console.error(error);
     });
 }
+
+function hideModal() {
+  const modalClose = document.querySelector("#modal");
+  modalClose.style.display = "none";
+}
