@@ -42,6 +42,21 @@ registerForm
     validatePassword(event.target);
   });
 
+loginForm.querySelector('[type="password"]').addEventListener("blur", event => {
+  console.log(event.target);
+  validatePassword(event.target);
+});
+
+registerForm.querySelector('[name="email"]').addEventListener("blur", event => {
+  console.log(event.target);
+  validateEmail(event.target);
+});
+
+loginForm.querySelector('[name="email"]').addEventListener("blur", event => {
+  console.log(event.target);
+  validateEmail(event.target);
+});
+
 function showRegister() {
   registerForm.style.display = "block";
   loginForm.style.display = "none";
@@ -58,22 +73,47 @@ function togleStatus(newState) {
 }
 
 function validateRegisterForm(target) {
-  validatePassword(target.pass);
-  registerNewUser(target.email.value, target.pass.value);
+  const isFormValid = validateRequiredFields(target);
+  isFormValid ? registerNewUser(target.email.value, target.pass.value) : null;
 }
 
 function validateLoginForm(target) {
-  // validatePassword(target.pass);
-  logIn(target.email.value, target.pass.value);
+  const isFormValid = validateRequiredFields(target);
+  isFormValid ? logIn(target.email.value, target.pass.value) : null;
+}
+
+function validateRequiredFields(target) {
+  const isPasswordValid = validatePassword(target.pass);
+  const isEmailValid = validateEmail(target.email);
+  console.log(isPasswordValid);
+  console.log(isEmailValid);
+  return isPasswordValid && isEmailValid;
 }
 
 function validatePassword(field) {
-  if (field.value.length < 10) {
-    field.className += " is-invalid";
-    console.error("Your pass is too weak!");
-  } else {
-    field.className = "form-control is-valid";
+  if (field.value) {
+    markFieldAsValid(field);
+    return true;
   }
+  markFieldAsInvalid(field);
+  return false;
+}
+
+function markFieldAsInvalid(field) {
+  field.className += " is-invalid";
+}
+
+function markFieldAsValid(field) {
+  field.className = "form-control is-valid";
+}
+
+function validateEmail(field) {
+  if (field.value && validator.isEmail(field.value)) {
+    markFieldAsValid(field);
+    return true;
+  }
+  markFieldAsInvalid(field);
+  return false;
 }
 
 function registerNewUser(email, password) {
@@ -93,5 +133,8 @@ function logIn(email, password) {
 }
 
 function handleError(error) {
-  alert(`Error! ${error.code} - ${error.message}`);
+  const alert = document.querySelector(".alert");
+  const message = alert.querySelector(".error-message");
+  message.innerHTML = error.message;
+  alert.className = "alert alert-danger fade show m-4";
 }

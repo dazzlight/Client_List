@@ -25,7 +25,7 @@
                 <div class="form-group">
                   <input
                     class="form-control"
-                    type="email"
+                    type="text"
                     name="email"
                     value=""
                     placeholder="Your Email"
@@ -60,7 +60,7 @@
                 <div class="form-group">
                   <input
                     class="form-control"
-                    type="email"
+                    type="text"
                     name="email"
                     value=""
                     placeholder="Your Email"
@@ -85,6 +85,10 @@
                   Register
                 </button>
               </form>
+              <div class="alert alert-danger fade show m-4 d-none" role="alert">
+                <strong>Error</strong>
+                <span class="error-message"> </span>
+              </div>
             </div>
           </div>
         </section>
@@ -94,6 +98,13 @@
   <script>
     (function() {})();
   </script>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script
+    type="text/javascript"
+    src="libs/validator.min.js"
+    charset="utf-8"
+  ></script>
   <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
