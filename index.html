@@ -54,11 +54,122 @@
       </nav>
     </section>
     <section class="container">
-      <div>
-        <button class="btn btn-primary btn-block" onclick="addClient()">
+      <form method="POST" id="newClientForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            class="form-control"
+            id="firstName"
+            placeholder="First Name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            class="form-control"
+            id="lastName"
+            placeholder="Last Name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="clientEmail">Email address</label>
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            id="clientEmail"
+            aria-describedby="emailHelp"
+          />
+          <small id="emailHelp" class="form-text text-muted"
+            >We'll never share your email with anyone else.</small
+          >
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="genderMale"
+            value="Male"
+          />
+          <label class="form-check-label" for="genderMale">
+            Male
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="genderFemale"
+            value="Female"
+          />
+          <label class="form-check-label" for="genderFemale">
+            Female
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="genderOther"
+            value="Other"
+          />
+          <label class="form-check-label" for="genderOther">
+            Other
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input
+                type="text"
+                name="amount"
+                class="form-control"
+                id="amount"
+                placeholder="Amount"
+              />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input
+                type="text"
+                name="date"
+                class="form-control"
+                id="date"
+                placeholder="Date"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="btn btn-link">
+            <i class="fas fa-plus"></i> Browse Photo<input
+              type="file"
+              hidden
+              name="photo"
+            />
+          </label>
+        </div>
+        <!-- <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label" for="exampleCheck1"
+            >Check me out</label
+          >
+        </div> -->
+
+        <button type="submit" class="btn btn-primary">
           Add new client
         </button>
-      </div>
+      </form>
     </section>
     <section class="container resultList">
       <div class="row">
@@ -82,6 +193,7 @@
       </div>
     </section>
   </body>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
   <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
