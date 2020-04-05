@@ -1,3 +1,23 @@
+//Observe changes
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    // User is signed in.
+    //   let displayName = user.displayName;
+    let email = user.email;
+    alert("Hello " + email);
+    //   let emailVerified = user.emailVerified;
+    //   let photoURL = user.photoURL;
+    //   let isAnonymous = user.isAnonymous;
+    //   let uid = user.uid;
+    //   let providerData = user.providerData;
+  } else {
+    window.location.href = "file:///F:/DILYA/ClientList/login.html";
+
+    // User is signed out.
+    // ...
+  }
+});
+
 function displayData(clientsList = clients) {
   clearList();
   const ul = document.querySelector("#clientsData");
@@ -145,4 +165,19 @@ function addClient() {
       console.log("Data added to database!");
     }
   });
+}
+
+function logOut() {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      // Sign-out successful.
+
+      window.location.href = "file:///F:/DILYA/ClientList/login.html";
+    })
+    .catch(function(error) {
+      // An error happened.
+      console.error(error);
+    });
 }
