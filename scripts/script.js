@@ -188,7 +188,7 @@ function logOut() {
     });
 }
 
-function hideModal() {
-  const modalClose = document.querySelector("#modal");
-  modalClose.style.display = "none";
-}
+// function hideModal() {
+//   const modalClose = document.querySelector("#modal");
+//   modalClose.style.display = "none";
+// }
