@@ -1,5 +1,5 @@
 //Observe changes
-firebase.auth().onAuthStateChanged(user => {
+firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in.
     //   let displayName = user.displayName;
@@ -20,15 +20,17 @@ firebase.auth().onAuthStateChanged(user => {
 
 const newClientForm = document.querySelector("#newClientForm");
 
-newClientForm.addEventListener("submit", event => {
+newClientForm.addEventListener("submit", (event) => {
   event.preventDefault();
   addClient(event.target);
+  // $("#modal").modal("hide");
+  // return false;
 });
 
 function displayData(clientsList = clients) {
   clearList();
   const ul = document.querySelector("#clientsData");
-  clientsList.forEach(client => {
+  clientsList.forEach((client) => {
     ul.appendChild(getLiElement(client));
   });
   sumAmount(clientsList);
@@ -96,7 +98,7 @@ function filterList() {
     .value.toLowerCase()
     .trim();
   if (filterString) {
-    const filteredClients = clients.filter(client => {
+    const filteredClients = clients.filter((client) => {
       return (
         client.firstName.toLowerCase().includes(filterString) ||
         client.lastName.toLowerCase().includes(filterString) ||
@@ -118,7 +120,7 @@ function sumAmount(clientsList = clients) {
   const total = clientsList.reduce((amount, client) => {
     return amount + removeCurrencyFromAmount(client.amount);
   }, 0);
-  document.querySelectorAll(".totalAmountContainer").forEach(element => {
+  document.querySelectorAll(".totalAmountContainer").forEach((element) => {
     element.innerHTML = total.toFixed(2);
   });
 }
@@ -155,16 +157,13 @@ function addClient(form) {
     gender: form.gender.value,
     amount: form.amount.value,
     date: form.date.value,
-    avatar: form.photo.value
+    avatar: form.photo.value,
   };
   console.log(data);
-  const newId = database
-    .ref()
-    .child("clients")
-    .push().key;
+  const newId = database.ref().child("clients").push().key;
   let updates = {};
   updates[`clients/${newId}`] = data;
-  database.ref().update(updates, function(error) {
+  database.ref().update(updates, function (error) {
     if (error) {
       console.error("New client was not added! Error occured!");
     } else {
@@ -182,13 +181,20 @@ function logOut() {
 
       window.location.href = "file:///F:/DILYA/ClientList/login.html";
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // An error happened.
       console.error(error);
     });
 }
 
-// function hideModal() {
-//   const modalClose = document.querySelector("#modal");
-//   modalClose.style.display = "none";
-// }
+function hideModal() {
+  const saveChanges = document.getElementById("saveChanges");
+
+  saveChanges.addEventListener("click", () => {
+    addClient(newClientForm);
+    saveChanges.setAttribute("data-dismiss", "modal");
+  });
+
+  // $("#modal").modal("hide");
+  // return false;
+}
