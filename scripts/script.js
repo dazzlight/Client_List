@@ -23,8 +23,8 @@ const newClientForm = document.querySelector("#newClientForm");
 newClientForm.addEventListener("submit", (event) => {
   event.preventDefault();
   addClient(event.target);
-  // $("#modal").modal("hide");
-  // return false;
+  $("#exampleModal").modal("hide");
+  return false;
 });
 
 function displayData(clientsList = clients) {
@@ -185,16 +185,4 @@ function logOut() {
       // An error happened.
       console.error(error);
     });
-}
-
-function hideModal() {
-  const saveChanges = document.getElementById("saveChanges");
-
-  saveChanges.addEventListener("click", () => {
-    addClient(newClientForm);
-    saveChanges.setAttribute("data-dismiss", "modal");
-  });
-
-  // $("#modal").modal("hide");
-  // return false;
 }
