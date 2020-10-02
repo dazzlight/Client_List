@@ -23,7 +23,15 @@ const newClientForm = document.querySelector("#newClientForm");
 newClientForm.addEventListener("submit", (event) => {
   event.preventDefault();
   addClient(event.target);
-  $("#exampleModal").modal("hide");
+  $("#addClientModal").modal("hide");
+  return false;
+});
+
+const editClientForm = document.querySelector("#editClientForm");
+editClientForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  editClient(event.target);
+  $("#editClientModal").modal("hide");
   return false;
 });
 
@@ -65,19 +73,67 @@ function createClientDescription(client, id) {
   );
 
   const deleteLink = document.createElement("a");
-  deleteLink.innerHTML = " Delete";
+  deleteLink.innerHTML = "Delete";
   deleteLink.setAttribute("href", "#");
+  deleteLink.classList.add("mx-2");
   deleteLink.addEventListener("click", (event) => {
     event.preventDefault();
     deleteClient(id);
   });
 
+  const editLink = createEditLink(id);
   div.appendChild(textPart1);
   div.appendChild(mailLink);
   div.appendChild(textPart2);
+  div.appendChild(editLink);
   div.appendChild(deleteLink);
 
   return div;
+}
+
+function createEditLink(id) {
+  const editLink = document.createElement("a");
+  editLink.innerHTML = "Edit";
+  editLink.setAttribute("href", "#");
+  editLink.setAttribute("data-toggle", "modal");
+  editLink.setAttribute("data-target", "#editClientModal");
+  editLink.setAttribute("data-client-id", id);
+  editLink.classList.add("mx-2");
+  editLink.classList.add("edit-client-link");
+  editLink.addEventListener("click", (event) => {
+    fillClientForm(id);
+  });
+  return editLink;
+}
+
+function fillClientForm(id) {
+  if (editClientForm) {
+    editClientForm.firstName.value = clients[id].firstName;
+    editClientForm.lastName.value = clients[id].lastName;
+    editClientForm.email.value = clients[id].email;
+    editClientForm.gender.value = clients[id].gender;
+    editClientForm.amount.value = clients[id].amount;
+    editClientForm.date.value = clients[id].date;
+    editClientForm.clientID.value = id;
+  }
+}
+
+function editClient(form) {
+  const data = {
+    firstName: form.firstName.value,
+    lastName: form.lastName.value,
+    email: form.email.value,
+    gender: form.gender.value,
+    amount: form.amount.value,
+    date: form.date.value,
+  };
+
+  const id = form.clientID.value;
+  let updates = {};
+  updates[`clients/${id}`] = data;
+
+  console.log("id", id, data);
+  if (id) updateDB(updates);
 }
 
 function deleteClient(id) {
@@ -176,15 +232,21 @@ function addClient(form) {
     date: form.date.value,
     avatar: form.photo.value,
   };
-  console.log(data);
+
   const newId = database.ref().child("clients").push().key;
   let updates = {};
   updates[`clients/${newId}`] = data;
+
+  updateDB(updates);
+}
+function updateDB(updates) {
   database.ref().update(updates, function (error) {
     if (error) {
-      console.error("New client was not added! Error occured!");
+      console.error(
+        "New client was not added or was not saved! Error occured!"
+      );
     } else {
-      console.log("Data added to database!");
+      console.log("Data added/saved to database!");
     }
   });
 }
