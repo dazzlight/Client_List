@@ -38,23 +38,24 @@ editClientForm.addEventListener("submit", (event) => {
 function displayData(clientsList = clients) {
   clearList();
   const ul = document.querySelector("#clientsData");
-  for (const property in clientsList) {
-    console.log(`${property}: ${clientsList[property]}`);
-    ul.appendChild(getLiElement(clientsList[property], property));
-  }
+  clientsList.forEach((client) => {
+    ul.appendChild(getLiElement(client));
+  });
+
   sumAmount(clientsList);
 }
 
-function getLiElement(client, id) {
+function getLiElement(client) {
+  const { avatar, clientId } = client;
   const newLi = document.createElement("li");
-  const avatar = document.createElement("img");
+  const image = document.createElement("img");
   newLi.className = "media";
-  newLi.id = id;
-  avatar.className = "mr-3 align-self-center";
-  avatar.setAttribute("src", client.avatar);
+  newLi.id = clientId;
+  image.className = "mr-3 align-self-center";
+  image.setAttribute("src", avatar);
 
-  newLi.appendChild(avatar);
-  newLi.appendChild(createClientDescription(client, id));
+  newLi.appendChild(image);
+  newLi.appendChild(createClientDescription(client, clientId));
   return newLi;
 }
 
@@ -107,13 +108,14 @@ function createEditLink(id) {
 }
 
 function fillClientForm(id) {
+  const currentClient = clients.find((client) => client.clientId == id);
   if (editClientForm) {
-    editClientForm.firstName.value = clients[id].firstName;
-    editClientForm.lastName.value = clients[id].lastName;
-    editClientForm.email.value = clients[id].email;
-    editClientForm.gender.value = clients[id].gender;
-    editClientForm.amount.value = clients[id].amount;
-    editClientForm.date.value = clients[id].date;
+    editClientForm.firstName.value = currentClient.firstName;
+    editClientForm.lastName.value = currentClient.lastName;
+    editClientForm.email.value = currentClient.email;
+    editClientForm.gender.value = currentClient.gender;
+    editClientForm.amount.value = currentClient.amount;
+    editClientForm.date.value = currentClient.date;
     editClientForm.clientID.value = id;
   }
 }
